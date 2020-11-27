@@ -11,7 +11,7 @@ study as shown in the picture below:
 ![cell_segm](img/cell_segm.png?raw=true "Serum cells segmentation pipeline")
 
 The input to the pipeline is an image consiting of 2 channels: the 'nuclei channel' (containing DAPI stained nuclei) and the 'serum channel' (dsRNA antibody staining). The output from the pipeline is a segmentation image where each individual cell is assigned a unique label/number.
-You can download the images, together with ground-truth labels from [here](https://github.com/hci-unihd/antibodies-nuclei/tree/master/groundtruth) (TODO: upload to OwnCloud).
+You can download the images, together with ground-truth labels from [here](https://oc.embl.de/index.php/s/gfpnDykYgcxoM7y).
 The covid assay dataset is saved using the HDF5 file format. Each HDF5 file contains two internal datasets:
 * `raw` - containing the 2 channel input image; dataset shape: `(2, 1024, 1024)` 
 * `cells` - containing the ground truth cell segmentation `(1024, 1024)`
