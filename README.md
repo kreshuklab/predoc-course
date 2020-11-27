@@ -15,11 +15,11 @@ The segmentation task can be split in three parts:
 2. Predicting cell boundaries using the **serum channel**
 3. Segmentation of individual cells with a seeded watershed algorithm, given the segmented nuclei and the boundary mask.
 
-## Nuclei segmentation with ore-trained StarDist model
+### Nuclei segmentation with ore-trained StarDist model
 
 
-## Cell boundary segmentation using pre-trained model and ilastik's Neural Network workflow
+### Cell boundary segmentation using pre-trained model and ilastik's Neural Network workflow
 
 
-## Segmentation with seeded watershed
+### Segmentation with seeded watershed
 
