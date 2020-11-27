@@ -48,7 +48,7 @@ After downloading and installing ilastik in your system, please follow the [inst
 required to run the Neural Network workflow with ilastik.
 
 Given the successful setup of the Neural Network workflow, please download the pre-trained 2D U-Net model trained to predict
-cell boundaries from the serum channel from [here](https://oc.embl.de/index.php/s/QL5ClXZT0a9mTIj).
+cell boundaries from the serum channel from [here](https://oc.embl.de/index.php/s/wCw0u5dJ5J3SDOE).
 Then:
 * open ilastik and create the Neural Network workflow
 * load the images containing the serum channel
