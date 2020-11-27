@@ -5,7 +5,7 @@ You will design an image analysis pipeline for immunofluorescence images of COVI
 
 As part of this challeng you will explore algorithms to segment individual cells in the IF images from the above study as shown in the picture below:
 
-
+![cell_segm](img/cell_segm.png?raw=true "Serum cells segmentation pipeline")
 
 The input to the pipeline is an image consiting of 2 channels: the 'nuclei channel' (containing DAPI stained nuclei) and the 'serum channel' (dsRNA antibody staining). The output from the pipeline is a segmentation image where each individual cell is assigned a unique label/number.
 You can download the images, together with ground-truth labels from [here](https://github.com/hci-unihd/antibodies-nuclei/tree/master/groundtruth) (TODO: upload to OwnCloud).
