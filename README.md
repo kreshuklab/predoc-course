@@ -38,7 +38,25 @@ After successfully segmenting the nuclei from the covid assay dataset, save the 
 since you'll need it in step 3.
 
 ### Cell boundary segmentation using pre-trained model and ilastik's Neural Network workflow
+In order to simplify the task of cell boundary prediction you will also use a pre-trained CNN.
+This time we encourage you to use the [ilatik Neural Network Classification Workflow](https://www.ilastik.org/documentation/nn/nn).
+Please download and install the latest beta version of ilastik in order to use the Neural Network Classification workflow (see: https://www.ilastik.org/download.html).
 
+After downloading and installing ilastik in your system, please follow the [instructions](https://github.com/ilastik/tiktorch)
+required to run the Neural Network workflow with ilastik.
+
+Given the successful setup of the Neural Network workflow, please download the pre-trained 2D U-Net model trained to predict
+cell boundaries from the serum channel from [here](https://oc.embl.de/index.php/s/QL5ClXZT0a9mTIj).
+Then:
+* open ilastik and create the Neural Network workflow
+* load the images containing the serum channel
+* load the ZIP file containing the pre-trained model
+* run the prediction
+* save the results in the appropriate format (tiff or hdf5) for further processing
+
+**Important note**
+The network predicts 2 channels: the 1st channel contains a foreground(cells)/background prediction and the 2nd channel
+contains the cell boundaries. You will need both channels for step 3.
 
 ### Segmentation with seeded watershed
 
