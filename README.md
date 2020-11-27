@@ -60,7 +60,7 @@ you should see at least the `cpu` device in the list; if you have a `cuda` capab
 * after the model has been loaded successfully, click `Live Predict`; after the prediction is finished you can see the two output channels
 predicted by the network (i.e. foreground channel and cell boundaries channel) by switching between the layers in `Group Visibility` section (bottom left);
 you should see something like the image below:
-![cell_segm](img/ilastik_nn_workflow.png?raw=true "NN workflow"){:height="50%" width="50%"}
+![cell_segm](img/ilastik_nn_workflow.png?raw=true "NN workflow")
 * go to `Export Data` and save the output from the network in hdf5 format for further processing
 
 **Important note**
