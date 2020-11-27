@@ -50,11 +50,18 @@ required to run the Neural Network workflow with ilastik.
 Given the successful setup of the Neural Network workflow, please download the pre-trained 2D U-Net model trained to predict
 cell boundaries from the serum channel from [here](https://oc.embl.de/index.php/s/wCw0u5dJ5J3SDOE).
 Then:
-* open ilastik and create the Neural Network workflow
-* load the images containing the serum channel
-* load the ZIP file containing the pre-trained model
-* run the prediction
-* save the results in the appropriate format (tiff or hdf5) for further processing
+* start tiktorch server: see `https://github.com/ilastik/tiktorch`
+* open ilastik and create the `Neural Network Classification (Beta)` project
+* load a sample H5 image: `Raw Data -> Add New -> Add separate image -> (choose h5 file)`
+make sure to load only the serum channel; you need to extract the serum channel and save it in a separate h5 file, the size should be `(1, 1024, 1024)`; **do not skip the singleton dimension**
+* go to `Server Configuration` and click `Get Devices` (default settings for the host and port should be correct);
+you should see at least the `cpu` device in the list; if you have a `cuda` capable device on your system then select it; click `Save`
+* go to `NN Training`, click `Load model` and select the `UNet2DSarsCoV2SerumBoundary.zip` file you downloaded from [here](https://oc.embl.de/index.php/s/wCw0u5dJ5J3SDOE)
+* after the model has been loaded successfully, click `Live Predict`; after the prediction is finished you can see the two output channels
+predicted by the network (i.e. foreground channel and cell boundaries channel) by switching between the layers in `Group Visibility` section (bottom left);
+you should see something like the image below:
+![cell_segm](img/ilastik_nn_workflow.png?raw=true "NN workflow"){:height="50%" width="50%"}
+* go to `Export Data` and save the output from the network in hdf5 format for further processing
 
 **Important note**
 The network predicts 2 channels: the 1st channel contains a foreground(cells)/background prediction and the 2nd channel
