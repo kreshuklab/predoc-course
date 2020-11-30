@@ -10,13 +10,14 @@ study as shown in the picture below:
 
 ![cell_segm](img/cell_segm.png?raw=true "Serum cells segmentation pipeline")
 
-The input to the pipeline is an image consiting of 2 channels: the 'nuclei channel' (containing DAPI stained nuclei) and the 'serum channel' (dsRNA antibody staining).
+The input to the pipeline is an image consiting of 3 channels: the 'nuclei channel' (containing DAPI stained nuclei), the 'serum channel' (dsRNA antibody staining) and the 'infection channel' (ignored in this challenge).
 The output from the pipeline is a segmentation image where each individual cell is assigned a unique label/number.
 You can download the Covid assay dataset from [here](https://oc.embl.de/index.php/s/gfpnDykYgcxoM7y).
 The dataset consist of 6 files containing the raw data together with ground-truth labels.
 The data is saved using the HDF5 file format. Each HDF5 file contains two internal datasets:
-* `raw` - containing the 2 channel input image; dataset shape: `(2, 1024, 1024)` 
+* `raw` - containing the 3 channel input image; dataset shape: `(3, 1024, 1024)`: 1st channel - serum, 2nd channel - infection (**ignored**), 3 - nuclei
 * `cells` - containing the ground truth cell segmentation `(1024, 1024)`
+* `infected` - containing the ground truth for cell infection (at the nuclei level); contains 3 labels: `0 - background`, `1 - infected cell/nuclei`, `2 - non-infected cell/nuclei` 
 
 We recommend [ilastik4ij ImageJ/Fiji](https://github.com/ilastik/ilastik4ij) for loading and exploring the data. 
 
@@ -68,7 +69,16 @@ The network predicts 2 channels: the 1st channel contains a foreground(cells)/ba
 contains the cell boundaries. You will need both channels for step 3.
 
 ### Segmentation with seeded watershed
+Given the nuclei segmentation (step 1), the foreground mask and the the boundary prediction maps (step 2),
+use the seeded watershed algorithm from the `skimage` (see [documentation](https://scikit-image.org/docs/stable/api/skimage.segmentation.html#skimage.segmentation.watershed))
+library in order to segment the cells in the serum channel.
 
-
+Tip:
+The watershed function is defined as follows:
+```python
+skimage.segmentation.watershed(image, markers=None, mask=None)
+```
+use boundary probability maps as `image` argument, nuclei segmentation as `markers` argument, and the foreground mask as the `mask` argument.
+ 
 ## Analyze the distribution of shapes in the segmented cells/nuclei population
 For Virginie and Johannes... 
