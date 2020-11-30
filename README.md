@@ -69,12 +69,6 @@ Given the nuclei segmentation (step 1), the foreground mask and the the boundary
 use the seeded watershed algorithm from the `skimage` (see [documentation](https://scikit-image.org/docs/stable/api/skimage.segmentation.html#skimage.segmentation.watershed))
 library in order to segment the cells in the serum channel.
 
-Tip:
-The watershed function is defined as follows:
-```python
-skimage.segmentation.watershed(image, markers=None, mask=None)
-```
-use boundary probability maps as `image` argument, nuclei segmentation as `markers` argument, and the foreground mask as the `mask` argument.
- 
+
 ## Analyze the distribution of shapes in the segmented cells/nuclei population
 For Virginie and Johannes... 
