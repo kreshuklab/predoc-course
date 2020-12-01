@@ -80,5 +80,38 @@ skimage.segmentation.watershed(image, markers=None, mask=None)
 ```
 use boundary probability maps as `image` argument, nuclei segmentation as `markers` argument, and the foreground mask as the `mask` argument.
  
-## Analyze the distribution of shapes in the segmented cells/nuclei population
-For Virginie and Johannes... 
+## Nuclei classification and shape characterization
+In this part of the challenge you will train a classifier to distinguish
+between infected/non-infected cells and characterize the shapes of the
+(segmented) nuclei.
+
+### Nuclei classification
+**Task**
+(Implement and) train a classifier that is able to group cell into the categories infected/non-infected.
+To see how your model performs, reserve the nuclei from one of the 6 images for testing.
+
+You are completely free in the way you solve this task, i.e. which model you use, if you use one from
+a library or implement it yourself etc.
+
+**General hints**
+- [sklearn](https://scikit-learn.org/stable/) is a great library for classical machine learning in python and contains classifiers such as random forst, SVM etc.
+- [pytorch](https://pytorch.org/) is a great library if you want to use a neural network
+- [numpy](https://numpy.org/) is fundamental package for scientific computing which you will definetly need for this task
+All these packages (and more) can be installed via [conda] (https://www.anaconda.com/).
+
+In the following we will give you some hints on how to solve this task with a neural network.
+The packages needed for that are contained in the `environment.yml` and can be installed via `conda env create -f environment.yaml`
+
+#### Data handling
+TODO
+
+#### Model
+TODO
+
+#### Training loop
+TODO
+
+### Charactersiation of the nuclei shapes
+**Task**
+Find out what shape descriptors are. Which ones are commonly used in cell biology?
+Select a subset of the ones that you find interesting and represent your data with them. Finally, create a umap/pca plot of the nuclei population using shape descriptors.
