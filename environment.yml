@@ -1,0 +1,10 @@
+name: qbm-challenge
+channels:
+  - conda-forge
+  - pytorch
+dependencies:
+  - h5py
+  - numpy
+  - pytorch=1.6.0
+  - scikit-learn 
+  - scikit-image
