@@ -198,7 +198,7 @@ for epoch in range(epochs):
 **Note**
 If you are stuck, have a look at the various pytorch tutorial, e.g. [cifar classification](https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html)
 
-### Charactersiation of the nuclei shapes
+### Cell/Nuclei shape characterisation
 **Task**
 Find out what shape descriptors are. Which ones are commonly used in cell biology?
 Select a subset of the ones that you find interesting and represent your data with them, i.e. compute new representations
