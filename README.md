@@ -76,20 +76,23 @@ skimage.segmentation.watershed(image, markers=None, mask=None)
 ```
 use boundary probability maps as `image` argument, nuclei segmentation as `markers` argument, and the foreground mask as the `mask` argument.
  
-## Nuclei classification and shape characterization
+## Cell classification and shape characterization
 In this part of the challenge you will train a classifier to distinguish
 between infected/non-infected cells and characterize the shapes of the
 (segmented) nuclei.
 
-### Nuclei classification
+### Cell classification
 **Task**
-(Implement and) train a classifier that is able to group cell into the categories infected/non-infected.
-To see how your model performs, reserve the nuclei from one of the 6 images for testing.
+(Implement and) train a classifier that is able to group cells into the categories infected/non-infected.
+Evaluate your model on a test set, which should contain approximately 10% of all cells. Make sure that these cells are
+randomly sampled across all images.
 
 You are completely free in the way you solve this task, i.e. which model you use, if you use one from
 a library or implement it yourself etc.
 
 **General hints**
+- Training the classifier using the whole cell (instance segmentation mask available in each `.h5` file under `cells`)
+should be easier then using just the nucleus + some of the cytoplasm sourrounding it.
 - [sklearn](https://scikit-learn.org/stable/) is a great library for classical machine learning in python and contains classifiers such as random forst, SVM etc.
 - [pytorch](https://pytorch.org/) is a great library if you want to use a neural network
 - [numpy](https://numpy.org/) is fundamental package for scientific computing which you will definetly need for this task
@@ -100,13 +103,15 @@ In the following we will give you some hints on how to solve this task with a ne
 The packages needed for that are contained in the `environment.yml` and can be installed via `conda env create -f environment.yaml`
 
 #### Data handling
-First, you should transform your data in a way that you can locate each nucleus and give it to the network for classification.
+First, you should transform your data such that you can locate each nucleus and give it to the network for classification.
 This can be done, e.g., by generating a sequence of bounding boxes for each image in which each bounding box contains the
 location of one nucleus.
 
+![bounding_boxes](img/bounding_boxes?raw=true "Bounding boxes around cells")
+
 You can open the `.h5` files by using pythons `with` statement and the `h5py.File` function. From there you can extract
 all the information you need (have a look at [h5py doc](https://docs.h5py.org/en/stable/index.html) if you are stuck)
-to generate nuclei bounding boxes.
+to generate cell/nuclei bounding boxes.
 
 Next, you have to implement a custom `Dataset` class (see [pytorch Dataset](https://pytorch.org/docs/stable/data.html?highlight=dataset#torch.utils.data.Dataset)), which you will later use to sample nuclei for training your network.
 The class could look like this:
@@ -161,7 +166,7 @@ pytorch's `nn` module contains many different layers and it is easy to get lost.
 
 #### Loss function and optimizer
 To make your network learn, you have to give it feedback on how well it is performing. This is done using a loss function.
-You can use the `torch.nn.BCELoss` for that.
+You can use for example `torch.nn.BCELoss` for that.
 
 After having computed the loss, you want to propagate the feedback signal back through the network to update its parameters.
 The `torch.optim` package takes care of this. It contains many optimizers which follow the same principle but differ in
@@ -169,9 +174,9 @@ the way they exactly update the weights. Usually `torch.optim.Adam` is a good ch
 `torch.optim.SGD` optimizer.
 
 #### Training loop
-The training loop contains all steps to train a network. More specifically, it starts with drawing samples from the data loader, which are then fed to the network to compute the forward pass. The networks outputs the predictions, which is the
-label infected/not-infected in our case, which are then used in combination with the ground truth labels to compute a loss.
-After having scored the predictons, we back propagate the error through the network and update our weights using the optimizer. A simple training routine can look like this
+The training loop contains all steps to train a network. More specifically, it starts with drawing samples from the data loader, which are then fed to the network to compute the forward pass. A loss is then computed based on the network predictions
+and the ground truth labels.
+After having scored the predictons, the error is backpropagated through the network and the weights are updated using the optimizer. A simple training routine can look like this
 
 ```
 for epoch in range(epochs):
@@ -196,4 +201,5 @@ If you are stuck, have a look at the various pytorch tutorial, e.g. [cifar class
 ### Charactersiation of the nuclei shapes
 **Task**
 Find out what shape descriptors are. Which ones are commonly used in cell biology?
-Select a subset of the ones that you find interesting and represent your data with them. Finally, create a umap/pca plot of the nuclei population using shape descriptors.
+Select a subset of the ones that you find interesting and represent your data with them, i.e. compute new representations
+for either the whole cell or nuclei population (or both). Finally, create a umap/pca of the population using the new representation.
