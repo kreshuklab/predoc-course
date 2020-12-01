@@ -111,7 +111,8 @@ to generate nuclei bounding boxes.
 Next, you have to implement a custom `Dataset` class (see [pytorch Dataset](https://pytorch.org/docs/stable/data.html?highlight=dataset#torch.utils.data.Dataset)), which you will later use to sample nuclei for training your network.
 The class could look like this:
 
-```class CovidDataset(Dataset):
+```
+class CovidDataset(Dataset):
     def __init__(self, raw_images, nuclei_segmentations, infected_masks):
         self._raw = raw_images
         self._nuclei_segmentations = nuclei_segmentations
@@ -143,7 +144,8 @@ The last step here is to create a `DataLoader` object which will enable you to d
 #### Model
 Next, you have to implement a neural network. Have a look at [pytorch nn.Module](https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module) how to do that. It should have the following form
 
-```import torch.nn as nn
+```
+import torch.nn as nn
 
 class Model(nn.Module):
     def __init__(self):
@@ -171,7 +173,8 @@ The training loop contains all steps to train a network. More specifically, it s
 label infected/not-infected in our case, which are then used in combination with the ground truth labels to compute a loss.
 After having scored the predictons, we back propagate the error through the network and update our weights using the optimizer. A simple training routine can look like this
 
-```for epoch in range(epochs):
+```
+for epoch in range(epochs):
     for sampled_nuclei, lables in data_loader:
         # zero parameter gradients
         optimizer.zero_grad()
