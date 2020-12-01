@@ -93,19 +93,104 @@ a library or implement it yourself etc.
 - [sklearn](https://scikit-learn.org/stable/) is a great library for classical machine learning in python and contains classifiers such as random forst, SVM etc.
 - [pytorch](https://pytorch.org/) is a great library if you want to use a neural network
 - [numpy](https://numpy.org/) is fundamental package for scientific computing which you will definetly need for this task
+
 All these packages (and more) can be installed via [conda] (https://www.anaconda.com/).
 
 In the following we will give you some hints on how to solve this task with a neural network.
 The packages needed for that are contained in the `environment.yml` and can be installed via `conda env create -f environment.yaml`
 
 #### Data handling
-TODO
+First, you should transform your data in a way that you can locate each nucleus and give it to the network for classification.
+This can be done, e.g., by generating a sequence of bounding boxes for each image in which each bounding box contains the
+location of one nucleus.
+
+You can open the `.h5` files by using pythons `with` statement and the `h5py.File` function. From there you can extract
+all the information you need (have a look at [h5py doc](https://docs.h5py.org/en/stable/index.html) if you are stuck)
+to generate nuclei bounding boxes.
+
+Next, you have to implement a custom `Dataset` class (see [pytorch Dataset](https://pytorch.org/docs/stable/data.html?highlight=dataset#torch.utils.data.Dataset)), which you will later use to sample nuclei for training your network.
+The class could look like this:
+
+`
+class CovidDataset(Dataset):
+    def __init__(self, raw_images, nuclei_segmentations, infected_masks):
+        self._raw = raw_images
+        self._nuclei_segmentations = nuclei_segmentations
+        self._infected_masks = infected_masks
+        self.nuclei_bounding_boxes = self.compute_bounding_boxes_from_nuclei_segmentation()
+        
+    def compute_bounding_boxes_from_nuclei_segmentation(self):
+        TODO
+        
+    def crop_out_nuclei_from_raw_image(self, bounding_box):
+        TODO
+        
+    def get_label_from_ground_truth_mask(self, bounding_box):
+        TODO
+
+    def __getitem__(self, idx):
+        bounding_box = self.nuclei_bounding_boxes[idx]
+        raw_nuclei = self.crop_out_nuclei_from_raw_image(bounding_box)
+        label = get_label_from_ground_truth_mask(bounding_box)
+        return (raw_nuclei, label)
+
+    def __len__(self):
+        TODO
+`
+
+The last step here is to create a `DataLoader` object which will enable you to draw random samples from your dataset class
+(have a look at [pytorch DataLoader](https://pytorch.org/docs/stable/data.html?highlight=dataset#torch.utils.data.DataLoader)).
 
 #### Model
-TODO
+Next, you have to implement a neural network. Have a look at [pytorch nn.Module](https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module) how to do that. It should have the following form
+
+`
+import torch.nn as nn
+
+class Model(nn.Module):
+    def __init__(self):
+        super(Model, self).__init__()
+        # network layers
+
+    def forward(self, nuclei_images):
+        # specifics of the forward computation
+`
+
+pytorch's `nn` module contains many different layers and it is easy to get lost. Focus on the `nn.Conv2d`, `nn.MaxPool2d` and
+`nn.Linear` layers to build your network. You'll also need an activation function; have a look at `torch.nn.functional.relu`.
+
+#### Loss function and optimizer
+To make your network learn, you have to give it feedback on how well it is performing. This is done using a loss function.
+You can use the `torch.nn.BCELoss` for that.
+
+After having computed the loss, you want to propagate the feedback signal back through the network to update its parameters.
+The `torch.optim` package takes care of this. It contains many optimizers which follow the same principle but differ in
+the way they exactly update the weights. Usually `torch.optim.Adam` is a good choice but you can also use the classical
+`torch.optim.SGD` optimizer.
 
 #### Training loop
-TODO
+The training loop contains all steps to train a network. More specifically, it starts with drawing samples from the data loader, which are then fed to the network to compute the forward pass. The networks outputs the predictions, which is the
+label infected/not-infected in our case, which are then used in combination with the ground truth labels to compute a loss.
+After having scored the predictons, we back propagate the error through the network and update our weights using the optimizer. A simple training routine can look like this
+`
+for epoch in range(epochs):
+    for sampled_nuclei, lables in data_loader:
+        # zero parameter gradients
+        optimizer.zero_grad()
+        
+        # forward
+        predictions = network(sampled_nuclei)
+        
+        # loss + backward
+        loss = criterion(predictions, labels)
+        loss.backward()
+        
+        # optimizer update
+        optimizer.step()
+`
+
+**Note**
+If you are stuck, have a look at the various pytorch tutorial, e.g. [cifar classification](https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html)
 
 ### Charactersiation of the nuclei shapes
 **Task**
