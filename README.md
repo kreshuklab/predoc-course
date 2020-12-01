@@ -31,12 +31,8 @@ For quantitative comparison one may use one of the common instance segmentation 
 
 More detailed description of the 3 steps can be found below.
 
-### Nuclei segmentation with pre-trained StarDist model
-We recommend to use [StarDist](https://arxiv.org/abs/1806.03535) for nuclei segmentation. The easiest way is to use the
-StarDist ImageJ/Fiji plugin, which contains an already pre-trained neural networks and can be used out of the box.
-Please visit the [plugin website](https://imagej.net/StarDist) and follow the instruction to install the plugin.
-In order to segment the nuclei from the nuclei channel please use the `Versatile (fluorescent nuclei)` model,
-pre-trained on the `DSB 2018` challenge, which contains data similar to our covid assay dataset.
+### Nuclei segmentation 
+Explore algorithms for instance segmentation of the nuclei from the 'nuclei channel'.
 After successfully segmenting the nuclei from the covid assay dataset, save the results in the appropriate format (tiff of hdf5),
 since you'll need it in step 3.
 
