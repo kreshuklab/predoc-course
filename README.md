@@ -107,7 +107,7 @@ First, you should transform your data such that you can locate each nucleus and 
 This can be done, e.g., by generating a sequence of bounding boxes for each image in which each bounding box contains the
 location of one nucleus.
 
-![bounding_boxes](img/bounding_boxes?raw=true "Bounding boxes around cells")
+![bounding_boxes](img/bounding_boxes.png?raw=true "Bounding boxes around cells")
 
 You can open the `.h5` files by using pythons `with` statement and the `h5py.File` function. From there you can extract
 all the information you need (have a look at [h5py doc](https://docs.h5py.org/en/stable/index.html) if you are stuck)
