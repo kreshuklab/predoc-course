@@ -20,7 +20,6 @@ def get_bounding_box_from_segmentation(raw_images,
         # get bounding box coordinates for each masks
         num_cells = len(cell_ids)
 
-        boxes = []
         for i in range(num_cells):
             pos = np.where(masks[i])
             x0 = np.min(pos[1])
