@@ -203,3 +203,8 @@ If you are stuck, have a look at the various pytorch tutorial, e.g. [cifar class
 Find out what shape descriptors are. Which ones are commonly used in cell biology?
 Select a subset of the ones that you find interesting and represent your data with them, i.e. compute new representations
 for either the whole cell or nuclei population (or both). Finally, create a umap/pca of the population using the new representation.
+
+You can think of shape descriptors as features for geometric objects. The purpose of them is to characterise shape, in our case cells/nuclei, such that one can measure the similarity/dissimilarity in terms of their geometrical properties.
+
+**Note**
+You can find examples of shape descriptors in this [paper's](https://www.biorxiv.org/content/10.1101/2020.02.26.961037v1.supplementary-material) supplementary material (Supplementary Table 2) or in those [slides](https://www.math.uci.edu/icamp/summer/research_11/park/shape_descriptors_survey_part3.pdf).
