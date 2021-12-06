@@ -1,11 +1,9 @@
 # predoc-course-2021
 
-You will design an image analysis pipeline for immunofluorescence images of COVID-infected cells published in [Microscopy-based assay for semi-quantitative detection of SARS-CoV-2 specific antibodies in human sera](https://www.biorxiv.org/content/10.1101/2020.06.15.152587v2). 
-In this challenge, you will learn how to use and adapt state-of-the-art bioimage analysis algorithms and combine them in 
-a custom pipeline to quantify visual information from microscopy images.
+You will design an image segemntation pipeline for immunofluorescence images of COVID-infected cells published in [Microscopy-based assay for semi-quantitative detection of SARS-CoV-2 specific antibodies in human sera](https://www.biorxiv.org/content/10.1101/2020.06.15.152587v2). 
 
 ## Cell segmentation
-In the first part of this challenge you will explore algorithms to segment individual cells in the IF images from the above 
+You will explore algorithms to segment individual cells in the IF images from the above 
 study as shown in the picture below:
 
 ![cell_segm](img/cell_segm.png?raw=true "Serum cells segmentation pipeline")
@@ -19,7 +17,7 @@ The data is saved using the HDF5 file format. Each HDF5 file contains two intern
 * `cells` - containing the ground truth cell segmentation `(1024, 1024)`
 * `infected` - containing the ground truth for cell infection (at the nuclei level); contains 3 labels: `0 - background`, `1 - infected cell/nuclei`, `2 - non-infected cell/nuclei` 
 
-We recommend [ilastik4ij ImageJ/Fiji](https://github.com/ilastik/ilastik4ij) for loading and exploring the data. 
+We recommend [ilastik4ij ImageJ/Fiji](https://github.com/ilastik/ilastik4ij) or [napari](https://napari.org/) for loading and exploring the data. 
 
 The actual segmentation task can be split in three parts:
 1. Segmentation of the nuclei using the **nuclei channel**
