@@ -37,21 +37,14 @@ since you'll need it in step 3.
 ### Cell boundary segmentation using pre-trained model and ilastik's Neural Network workflow
 In order to simplify the task of cell boundary prediction you will also use a pre-trained CNN.
 This time we encourage you to use the [ilatik Neural Network Classification Workflow](https://www.ilastik.org/documentation/nn/nn).
-Please download and install the latest beta version of ilastik in order to use the Neural Network Classification workflow (see: https://www.ilastik.org/download.html).
+Please download and install the **latest beta version** of ilastik in order to use the Neural Network Classification workflow (see: https://www.ilastik.org/download.html). 
 
-After downloading and installing ilastik in your system, please follow the [instructions](https://github.com/ilastik/tiktorch)
-required to run the Neural Network workflow with ilastik.
-
-Given the successful setup of the Neural Network workflow, please download the pre-trained 2D U-Net model trained to predict
-cell boundaries from the serum channel from [here](https://oc.embl.de/index.php/s/wCw0u5dJ5J3SDOE).
 Then:
-* start tiktorch server: see `https://github.com/ilastik/tiktorch`
-* open ilastik and create the `Neural Network Classification (Beta)` project
+* open ilastik and create the `Neural Network Classification (Local)` project
 * load a sample H5 image: `Raw Data -> Add New -> Add separate image -> (choose h5 file)`
-make sure to load only the serum channel; you need to extract the serum channel and save it in a separate h5 file, the size should be `(1, 1024, 1024)`; **do not skip the singleton dimension**
-* go to `Server Configuration` and click `Get Devices` (default settings for the host and port should be correct);
-you should see at least the `cpu` device in the list; if you have a `cuda` capable device on your system then select it; click `Save`
-* go to `NN Training`, click `Load model` and select the `UNet2DSarsCoV2SerumBoundary.zip` file you downloaded from [here](https://oc.embl.de/index.php/s/wCw0u5dJ5J3SDOE)
+make sure to load only the serum channel (you need to extract the serum channel and save it in a separate h5 file beforehand). The size of the input should be `(1, 1024, 1024)`; **do not skip the singleton dimension**
+* go to [the old BioimageIO website](https://deploy-preview-199--bioimage.netlify.app),  find `Covid-IF-Cells-BoundaryModel` model and download ilastik weights by clicking on the ilastik `icon` and then `Download (Pytorch State Dict)`   
+* go to `NN Prediction` and click `Load model`; load the model file downloaded in the previous step
 * after the model has been loaded successfully, click `Live Predict`; after the prediction is finished you can see the two output channels
 predicted by the network (i.e. foreground channel and cell boundaries channel) by switching between the layers in `Group Visibility` section (bottom left);
 you should see something like the image below:
