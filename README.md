@@ -66,3 +66,9 @@ The watershed function is defined as follows:
 skimage.segmentation.watershed(image, markers=None, mask=None)
 ```
 use boundary probability maps as `image` argument, nuclei segmentation as `markers` argument, and the foreground mask as the `mask` argument.
+
+### Segmentation results evaluation
+Compare your cell segmentation results with the ground truth (saved as `cells` dataset in the HDF5 files), using one/all of the metrics described below:
+* [Adapted Rand Error](https://scikit-image.org/docs/dev/api/skimage.metrics.html#skimage.metrics.adapted_rand_error)
+* [Variation of Information](https://scikit-image.org/docs/dev/api/skimage.metrics.html#skimage.metrics.variation_of_information)
+* [Average Precision](https://github.com/hci-unihd/plant-seg/blob/master/evaluation/ap.py#L131)
