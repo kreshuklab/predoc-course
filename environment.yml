@@ -1,10 +1,12 @@
-name: qbm-challenge
+name: predoc-challenge
 channels:
   - conda-forge
   - pytorch
 dependencies:
   - h5py
   - numpy
-  - pytorch=1.6.0
+  - pytorch
   - scikit-learn 
   - scikit-image
+  - napari
+

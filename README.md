@@ -67,6 +67,11 @@ skimage.segmentation.watershed(image, markers=None, mask=None)
 ```
 use boundary probability maps as `image` argument, nuclei segmentation as `markers` argument, and the foreground mask as the `mask` argument.
 
+[environment.yml](environment.yml) can be used to create a conda environment with the necessary dependencies:
+```bash
+conda env create -f environment.yml
+``` 
+
 ### Segmentation results evaluation
 Compare your cell segmentation results with the ground truth (saved as `cells` dataset in the HDF5 files), using one/all of the metrics described below:
 * [Adapted Rand Error](https://scikit-image.org/docs/dev/api/skimage.metrics.html#skimage.metrics.adapted_rand_error)
