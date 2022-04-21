@@ -1,6 +1,12 @@
-# predoc-course-2021
+# EIPP Bioinformatics Course 2022  <!-- omit in toc -->
 
-You will design an image segemntation pipeline for immunofluorescence images of COVID-infected cells published in [Microscopy-based assay for semi-quantitative detection of SARS-CoV-2 specific antibodies in human sera](https://www.biorxiv.org/content/10.1101/2020.06.15.152587v2). 
+You will design an image segemntation pipeline for immunofluorescence images of COVID-infected cells published in [Microscopy-based assay for semi-quantitative detection of SARS-CoV-2 specific antibodies in human sera](https://www.biorxiv.org/content/10.1101/2020.06.15.152587v3). 
+
+- [Cell segmentation](#cell-segmentation)
+  - [Nuclei segmentation](#nuclei-segmentation)
+  - [Cell boundary segmentation using pre-trained model and ilastik's Neural Network workflow](#cell-boundary-segmentation-using-pre-trained-model-and-ilastiks-neural-network-workflow)
+  - [Segmentation with seeded watershed](#segmentation-with-seeded-watershed)
+  - [Segmentation results evaluation](#segmentation-results-evaluation)
 
 ## Cell segmentation
 You will explore algorithms to segment individual cells in the IF images from the above 
@@ -43,7 +49,7 @@ Then:
 * open ilastik and create the `Neural Network Classification (Local)` project
 * load a sample H5 image: `Raw Data -> Add New -> Add separate image -> (choose h5 file)`
 make sure to load only the serum channel (you need to extract the serum channel and save it in a separate h5 file beforehand). The size of the input should be `(1, 1024, 1024)`; **do not skip the singleton dimension**
-* go to [the old BioimageIO website](https://deploy-preview-199--bioimage.netlify.app),  find `Covid-IF-Cells-BoundaryModel` model and download ilastik weights by clicking on the ilastik `icon` and then `Download (Pytorch State Dict)`   
+* go to [BioimageIO](https://bioimage.io/),  find [`CovidIFCellSegmentationBoundaryModel`](https://bioimage.io/#/?id=10.5281%2Fzenodo.5847355) and download ilastik weights by clicking on the ilastik `icon` and then `Download (Pytorch State Dict)`   
 * go to `NN Prediction` and click `Load model`; load the model file downloaded in the previous step
 * after the model has been loaded successfully, click `Live Predict`; after the prediction is finished you can see the two output channels
 predicted by the network (i.e. foreground channel and cell boundaries channel) by switching between the layers in `Group Visibility` section (bottom left);
