@@ -1,4 +1,6 @@
-# EIPP Theory@EMBL 2022 <!-- omit in toc -->
+# EIPP Theory@EMBL 2023 <!-- omit in toc -->
+
+_Course material in previous years/events are managed by other branches._
 
 You will design an image segemntation pipeline for immunofluorescence images of COVID-infected cells published in Microscopy-based assay for semi-quantitative detection of SARS-CoV-2 specific antibodies in human sera[[1]](https://www.biorxiv.org/content/10.1101/2020.06.15.152587v3). Please read the [Introduction](#introduction) before signing up to this challenge.
 
