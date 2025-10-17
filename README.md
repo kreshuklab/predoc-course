@@ -1,5 +1,5 @@
 
-# EIPP Theory@EMBL 2025 — Cell Segmentation (Simplified)
+# EIPP Theory@EMBL 2025 — Cell Segmentation
 
 *This branch contains the 2025 materials. Previous years are in other branches.*
 
