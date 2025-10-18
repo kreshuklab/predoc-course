@@ -6,6 +6,8 @@ In this year’s practical, you will learn how to design and run a **complete im
 
 The challenge introduces the key concepts of **supervised learning in bioimage analysis**, **probabilistic predictions**, and **classical image segmentation algorithms** such as the seeded watershed. The focus is on **interpreting what each stage does**, not on writing code from scratch.
 
+![Instance segmentation pipeline](img/pipeline.png)
+
 ---
 
 ## How is this going to work?
@@ -23,7 +25,7 @@ Depending on your background and confidence with Python and image analysis, you 
 
 ### Accessing the data on the cluster
 
-If you’re working on EMBL infrastructure, the dataset is already stored in the shared directory. To copy it to your home directory, first home to you home /home/USERNAME and then run:
+If you’re working on EMBL infrastructure, the dataset is already stored in the shared directory. To copy it to your home directory, first go to your home `/home/USERNAME` and then run:
 
 ```bash
 cp -r /scratch/almpanak/predoc-course ./
@@ -61,8 +63,6 @@ This challenge helps you understand:
 
 Output: a labeled instance image + quick color visualizations.
 
-![Instance segmentation pipeline](img/pipeline.png)
-
 ---
 
 ## Dataset
@@ -79,22 +79,43 @@ We also provide **separated channel** HDF5 files in `hdf5/nuclei/` and `hdf5/ser
 
 ## Software setup
 
-* **ilastik**: download latest version (GUI app).
-  [https://www.ilastik.org/download.html](https://www.ilastik.org/download.html)
+### ilastik
 
-* **Seeded watershed script** (Python):
+Download the latest version of **ilastik** (GUI app):
+[https://www.ilastik.org/download.html](https://www.ilastik.org/download.html)
 
-  * On the EMBL cluster, activate the pre-installed environment:
+### Environment setup (for running the Python script)
 
-    ```bash
-    source /g/kreshuk/almpanak/miniforge3/etc/profile.d/conda.sh
-    conda activate predoc-challenge
-    ```
-  * Run the script: `seeded_watershed_simple.py`
+If you are working on the EMBL cluster, you don’t need to install conda or anything else. The shared environment is already prepared.
 
-  Dependencies: `numpy`, `h5py`, `scikit-image`, `matplotlib`, `scipy`
+Run the following commands **once** to create a local copy of the course environment in your home folder:
 
-> If you’re not on the cluster, create your own conda environment from `environment.yml` or install these packages manually.
+```bash
+mkdir -p ~/envs/predoc-challenge
+
+tar -xzf /scratch/almpanak/envs/predoc-challenge-conda-pack.tar.gz -C ~/envs/predoc-challenge
+
+~/envs/predoc-challenge/bin/conda-unpack
+```
+
+To check that it works, run:
+
+```bash
+~/envs/predoc-challenge/bin/python -c "import numpy, h5py, skimage, matplotlib, scipy; print('env ok')"
+```
+
+If you see `env ok`, the environment is correctly installed.
+
+From now on, you can use this Python environment to run the seeded watershed script without activating anything:
+
+```bash
+~/envs/predoc-challenge/bin/python ~/predoc-course/seeded_watershed_simple.py \
+  --nuc /path/to/WellXX_..._nucProb.h5 \
+  --nn  /path/to/WellXX_..._nnseg.h5 \
+  --out ./
+```
+
+If you’re not on the cluster, you can create your own conda environment from the provided `environment.yml` or install the listed dependencies manually (`numpy`, `h5py`, `scikit-image`, `matplotlib`, `scipy`).
 
 ---
 
@@ -145,7 +166,7 @@ Given your two HDF5 exports (nuclei + neural network), the script `seeded_waters
 **Run:**
 
 ```bash
-python seeded_watershed_simple.py \
+~/envs/predoc-challenge/bin/python ~/predoc-course/seeded_watershed_simple.py \
   --nuc /path/to/WellXX_..._nucProb.h5 \
   --nn  /path/to/WellXX_..._nnseg.h5 \
   --out ./
