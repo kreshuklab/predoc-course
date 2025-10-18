@@ -61,6 +61,8 @@ This challenge helps you understand:
 
 Output: a labeled instance image + quick color visualizations.
 
+![Instance segmentation pipeline](img/pipeline.png)
+
 ---
 
 ## Dataset
