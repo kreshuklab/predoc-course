@@ -109,7 +109,7 @@ If you see `env ok`, the environment is correctly installed.
 From now on, you can use this Python environment to run the seeded watershed script without activating anything:
 
 ```bash
-~/envs/predoc-challenge/bin/python ~/predoc-course/seeded_watershed_simple.py \
+~/envs/predoc-challenge/bin/python ~/predoc-course/seeded_watershed.py \
   --nuc /path/to/WellXX_..._nucProb.h5 \
   --nn  /path/to/WellXX_..._nnseg.h5 \
   --out ./
@@ -155,7 +155,7 @@ This file will be used together with the nuclei probabilities in the final step.
 
 ![Instance segmentation result](img/instance_segm.png)
 
-Given your two HDF5 exports (nuclei + neural network), the script `seeded_watershed_simple.py` will generate a labeled instance segmentation.
+Given your two HDF5 exports (nuclei + neural network), the script `seeded_watershed.py` will generate a labeled instance segmentation.
 
 **Assumptions:**
 
@@ -166,7 +166,7 @@ Given your two HDF5 exports (nuclei + neural network), the script `seeded_waters
 **Run:**
 
 ```bash
-~/envs/predoc-challenge/bin/python ~/predoc-course/seeded_watershed_simple.py \
+~/envs/predoc-challenge/bin/python ~/predoc-course/seeded_watershed.py \
   --nuc /path/to/WellXX_..._nucProb.h5 \
   --nn  /path/to/WellXX_..._nnseg.h5 \
   --out ./
