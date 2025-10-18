@@ -101,7 +101,7 @@ def main():
     fg_prob  = pick_channel_2(nn_raw,  idx=0)  # foreground channel
     bnd_prob = pick_channel_2(nn_raw,  idx=1)  # boundary channel
 
-    # ---- Quick debug prints (what students see) ----
+    # ---- Quick debug prints ----
     print(f"nuc_prob shape={nuc_prob.shape} range=[{nuc_prob.min():.3f},{nuc_prob.max():.3f}]")
     print(f"fg_prob  shape={fg_prob.shape}  range=[{fg_prob.min():.3f},{fg_prob.max():.3f}]")
     print(f"bnd_prob shape={bnd_prob.shape} range=[{bnd_prob.min():.3f},{bnd_prob.max():.3f}]")

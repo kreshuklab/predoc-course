@@ -23,7 +23,7 @@ Depending on your background and confidence with Python and image analysis, you 
 
 ### Accessing the data on the cluster
 
-If you’re working on EMBL infrastructure, the dataset is already stored in the shared directory. To copy it to your home directory, run:
+If you’re working on EMBL infrastructure, the dataset is already stored in the shared directory. To copy it to your home directory, first home to you home /home/USERNAME and then run:
 
 ```bash
 cp -r /scratch/almpanak/predoc-course ./
@@ -101,12 +101,12 @@ We also provide **separated channel** HDF5 files in `hdf5/nuclei/` and `hdf5/ser
 ![Pixel annotation example](img/pixel_annotation.png)
 
 1. Open **Pixel Classification** in ilastik.
-2. Load **nuclei** images (DAPI channel). Make sure to set the correct axis order (CYX) under *Raw Data Properties*.
-3. Create 2 labels: **Nuclei** and **Background**.
+2. Load **nuclei** images (DAPI channel). Make sure to set the correct axis order (CYX) under *Raw Data -> Edit Properties*.
+3. Create 2 labels: **Nucleus** and **Background**.
 4. Enable **Live Update** and refine annotations until the prediction looks clean.
-5. **Export** the result as **HDF5**, with dataset name `/exported_data` and **two channels** `[Nuclei, Background]`.
+5. **Export** the result as **HDF5**, with dataset name `/exported_data` and **two channels** `[Nucleus, Background]`.
 
-We will later use **channel 0 (Nuclei)** as our seed probability map.
+We will later use **channel 0 (Nucleus)** as our seed probability map.
 
 ---
 
@@ -136,7 +136,7 @@ Given your two HDF5 exports (nuclei + neural network), the script `seeded_waters
 
 **Assumptions:**
 
-* Nuclei H5 `/exported_data` has 2 channels `[Nuclei, Background]` → use **channel 0**.
+* Nuclei H5 `/exported_data` has 2 channels `[Nucleus, Background]` → use **channel 0**.
 * NN H5 `/exported_data` has 2 channels `[Foreground, Boundary]` → use **channels 0 and 1**.
 * Default thresholds: `NUC_THR=0.60`, `FG_THR=0.50`.
 
