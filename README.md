@@ -26,7 +26,7 @@ Depending on your background and confidence with Python and image analysis, you 
 If you’re working on EMBL infrastructure, the dataset is already stored in the shared directory. To copy it to your home directory, run:
 
 ```bash
-cp -r /g/kreshuk/talks/predoc-course ./
+cp -r /scratch/almpanak/predoc-course ./
 ```
 
 If you’re on your own system, you can instead download the data from the shared drive or from the Google Drive link that will be provided during the session.
